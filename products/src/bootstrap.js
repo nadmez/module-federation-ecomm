@@ -1,16 +1,26 @@
 import faker from "faker";
 
-let products = "";
+const mount = (el) => {
+  let products = "";
 
-for (let i = 0; i < 5; i++) {
-  const name = faker.commerce.productName();
-  products += `
+  for (let i = 0; i < 5; i++) {
+    const name = faker.commerce.productName();
+    products += `
     <div>
      ${name}
     </div>
   `;
+  }
+
+  el.innerHTML = products;
+  console.log("Products app is mounted!");
+};
+
+if (process.env.NODE_ENV === "development") {
+  const el = document.querySelector("#dev-products");
+  if (el) {
+    mount(el);
+  }
 }
 
-document.getElementById("dev-products").innerHTML = products;
-
-console.log("Products app is loaded!");
+export { mount };
